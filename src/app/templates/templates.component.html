@@ -1,0 +1,34 @@
+<head>
+    <script type="text/javascript" src="https://smtpjs.com/v3/smtp.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<script>
+function onSubmitHandler() {
+    event.preventDefault();
+    Email.send({
+    SecureToken : "28415814-75d1-4305-9102-41981722d7ae",
+    To : 'm.dove@live.com',
+    From : "CuteCryption@outlook.com",
+    Subject : $("#Subject").val(),
+    Body : $("#Body").val(),
+}).then(
+  message => alert(message)
+);   
+  
+}
+</script>
+<form>
+    Subject:<br>
+    <input id="Subject" type="text" name="subject" value="subject"><br>
+    Body:<br>
+    <textarea id="Body" name="text" style="width:300px; height:200px;">
+    EMAIL BODY
+        </textarea> <br>
+       <!-- Refer to this later to add reCAPTCHA when deployed -->
+        <div class="g-reCAPTCHA" data-sitekey="6LfmIMwUAAAAABx1gGB1bdvM4C_kU6CV1D4zjWjU"></div><br>
+    <input type="submit" value="Submit"
+    onclick="onSubmitHandler()">
+
+  </form> 
