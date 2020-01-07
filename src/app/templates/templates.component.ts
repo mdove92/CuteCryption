@@ -18,6 +18,7 @@ export class TemplatesComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.getTemplates();
   }
 
 }

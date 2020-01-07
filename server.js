@@ -21,7 +21,7 @@ const forceSSL = function() {
 // Instruct the app
 // to use the forceSSL
 // middleware
-app.use(express.static('./'));
+app.use(express.static(__dirname + '/dist/cutecryption'));
 app.use(forceSSL());
 
 const path = require('path');
