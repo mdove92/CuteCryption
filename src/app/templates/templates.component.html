@@ -68,28 +68,34 @@ function onSubmitHandler() {
 'UTuR5TPy' +
 '=gKz7\n' +
 '-----END PGP PUBLIC KEY BLOCK-----';
-
-const options = {
-    message: openpgp.message.fromText($("#Body").val()),       // input as Message object
-    publicKeys: openpgp.key.readArmored(pubkey).keys, // for encryption
-}
+key = openpgp.key.readArmored(pubkey);
+                key.then(k => {
+                    const options = {
+                        message: openpgp.message.fromText($("#Body").val()),       // input as Message object
+                        publicKeys: k.keys, // for encryption
+                    }
 
 openpgp.encrypt(options).then(ciphertext => {
     encrypted = ciphertext.data // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
     return encrypted
 })
 .then(encrypted => { 
+    encryptedLines = encrypted.split("\n")
+                        htmlEncryptedMessage = ""
+                        encryptedLines.forEach((line) => {
+                            htmlEncryptedMessage = htmlEncryptedMessage.concat("<br/>", line);
+                        });
 	Email.send({
     SecureToken : "28415814-75d1-4305-9102-41981722d7ae",
     To : 'm.dove@live.com',
     From : "CuteCryption@outlook.com",
     Subject : $("#Subject").val(),
-    Body : encrypted,
+    Body : htmlEncryptedMessage,
 }).then(
   message => alert(message)
 );   
 });
-
+                });
 
 }
 </script>
