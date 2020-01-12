@@ -18,7 +18,7 @@ export class TemplatesComponent implements OnInit {
   }
 
   selectedItemChanged = function(){
-    calculatedValue = 'Y
+    this.class="Default";
   }
   
 
