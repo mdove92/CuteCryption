@@ -9,7 +9,18 @@ import { HttpClient } from '@angular/common/http';
 export class TemplatesComponent implements OnInit {
   javaBackendUrl = 'http://localhost:8080';
   templates = {}
-  constructor(private http: HttpClient) { }
+  scope={}
+  items =["Default","Bubbly", "Colorful", "Fun", "Hank"]
+  class = "";
+  
+  constructor(private http: HttpClient) { 
+    this.class="Default";
+  }
+
+  selectedItemChanged = function(){
+    calculatedValue = 'Y
+  }
+  
 
    getTemplates(){
     this.http.get(this.javaBackendUrl).subscribe((data) =>{
@@ -20,5 +31,6 @@ export class TemplatesComponent implements OnInit {
   ngOnInit() {
     this.getTemplates();
   }
+
 
 }
