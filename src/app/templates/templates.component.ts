@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -12,13 +12,15 @@ export class TemplatesComponent implements OnInit {
   scope={}
   items =["Default","Bubbly", "Colorful", "Fun", "Hank"]
   class = "";
+
+  @Input() formStyle = "form-style-3"
   
   constructor(private http: HttpClient) { 
     this.class="Default";
   }
 
-  selectedItemChanged = function(){
-    this.class="Default";
+  selectedItemChanged = function(event){
+    this.formStyle= event.target.value;
   }
   
 
