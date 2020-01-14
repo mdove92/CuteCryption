@@ -5,12 +5,10 @@
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/openpgp/4.6.2/compat/openpgp.min.js"></script>
 </head>
-
 <div class="templateComponent">
-
     <body class ="{{bodyClass}}">
-        <div class="{{templateStyle}}">
-        <script type="text/javascript">
+        <div class="{{templateStyle}}" >
+        <!-- <script type="text/javascript">
             function onSubmitHandler() {
                 event.preventDefault();
                 const pubkey = '-----BEGIN PGP PUBLIC KEY BLOCK-----\n' +
@@ -75,7 +73,6 @@
                         message: openpgp.message.fromText($("#Body").val()),       // input as Message object
                         publicKeys: k.keys, // for encryption
                     }
-
                     openpgp.encrypt(options).then(ciphertext => {
                         encrypted = ciphertext.data // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
                         return encrypted
@@ -97,7 +94,6 @@
                             );
                         });
                 });
-
             }
         </script>
         <form class="{{formStyle}}">
@@ -108,27 +104,27 @@
                     <textarea id="Body" name="text" style="width:100%; height:100%;">
             </textarea>
                     <!-- Refer to this later to add reCAPTCHA when deployed -->
-                    <div class="g-reCAPTCHA" data-sitekey="6LfmIMwUAAAAABx1gGB1bdvM4C_kU6CV1D4zjWjU"></div><br>
+                    <!-- <div class="g-reCAPTCHA" data-sitekey="6LfmIMwUAAAAABx1gGB1bdvM4C_kU6CV1D4zjWjU"></div><br>
                     <input id="submit" type="submit" value="Submit" onclick="onSubmitHandler()">
-
                 </div>
             </fieldset>
-        </form>
+        </form> -->
+        <div class="htmlTemplateContainer" [innerHTML]=safeHtmlTemplate></div>
         <form class="templateCreator">
             Email Address:<br>
-            <input id="UserEmail" type="text" name="useremail" value="useremail" (change)="userNameChanged($event)"><br>
+            <input (input)="email=$event.target.value" type="text" class="form-control">
             Template:<br>
             <br>
             <select (change)="selectedItemChanged($event)">
-                <option value="default">Default</option>
+                <!-- <option value="default">Default</option>
                 <option value="form-style-4">Modern</option>
                 <option value="form-style-3">Playful</option>
                 <option value="elegant">Elegant</option>
-                <option value="hank">Hank</option>
+                <option value="hank">Hank</option> -->
+                <option *ngFor="let template of templates; let i = index" [value]="i" >{{ template.Name }}</option>
             </select>
             <br>
             <input type="button" value="Generate Html" (click)="onClickHandler($event)">
-
         </form>
     </div>
     <div class="{{templateCreatedStyle}}">
