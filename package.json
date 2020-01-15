@@ -25,6 +25,7 @@
     "bootstrap": "^4.4.1",
     "express": "^4.17.1",
     "node": "^13.5.0",
+    "openpgp": "^4.8.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "typescript": "~3.5.3",
