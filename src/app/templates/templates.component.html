@@ -27,6 +27,9 @@
        
         <div class="templateHtml">
             <section>Copy the below html into your site to use the template</section>
+            <button (click)="copyToClipboard($event)"> Copy template to clipboard</button>
+            <button (click)="downloadPrivKey($event)"> Save private key</button>
+            <button (click)="downloadPubKey($event)"> Save public key</button>
             <div class="templateOutput" >
                 {{templateOutput}}
             </div>

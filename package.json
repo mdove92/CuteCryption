@@ -24,6 +24,7 @@
     "@ng-select/ng-select": "^3.7.1",
     "bootstrap": "^4.4.1",
     "express": "^4.17.1",
+    "file-saver": "^2.0.2",
     "node": "^13.5.0",
     "openpgp": "^4.8.0",
     "rxjs": "~6.4.0",

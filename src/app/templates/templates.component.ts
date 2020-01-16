@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import {FormControl, FormGroup, Validators, FormsModule} from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import openpgp from 'openpgp';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: "app-templates",
@@ -29,6 +30,8 @@ export class TemplatesComponent implements OnInit {
   @Input() safeHtmlTemplate;
   @Input() templateOutput = "";
   @Input() password = "";
+  @Input() publicKey ="";
+  @Input() privateKey = "";
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
   formGroup = new FormGroup({
@@ -53,8 +56,37 @@ export class TemplatesComponent implements OnInit {
   ngOnInit() {
     this.getTemplates();
   }
+
+  copyToClipboard = function(event){
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = this.templateOutput;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+
+  downloadPubKey = function(event){
+    var blob = new Blob([this.publicKey], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "0x" + this.formStyle +"-pub.asc");
+
+    return false;
+  }
+
+  downloadPrivKey = function(event){
+    var blob = new Blob([this.privateKey], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "0x" + this.formStyle +"-sec.asc");
+
+    return false;
+  }
+
   
-  onClickHandler = function(event) {
+  onClickHandler = async function(event) {
     this.templateStyle = "hidden";
     this.templateCreatedStyle = "shown";
     
@@ -66,16 +98,22 @@ export class TemplatesComponent implements OnInit {
       passphrase: this.password         // protects the private key
     };
 
-    openpgp.generateKey(options).then(function(key) {
-      var privkey = key.privateKeyArmored; // '-----BEGIN PGP PRIVATE KEY BLOCK ... '
-      var pubkey = key.publicKeyArmored;   // '-----BEGIN PGP PUBLIC KEY BLOCK ... '
+    var pubkey = ""
+    var privkey = "";
+
+    await openpgp.generateKey(options).then(function(key) {
+      privkey = key.privateKeyArmored; // '-----BEGIN PGP PRIVATE KEY BLOCK ... '
+      pubkey = key.publicKeyArmored;   // '-----BEGIN PGP PUBLIC KEY BLOCK ... '
       var revocationCertificate = key.revocationCertificate; // '-----BEGIN PGP PUBLIC KEY BLOCK ... '
     });
 
+    this.publicKey = pubkey;
+    this.privateKey = privkey;
+
     this.http.get(this.javaBackendUrl+`?templateName=${this.formStyle}&email=${this.email}`).subscribe(data => {
-      this.safeHtmlTemplate =  this.sanitizer.bypassSecurityTrustHtml(
-       this.templateOutput=  data[0]["Contents"]
-      );
+      
+       this.templateOutput=  data[0]["Contents"].replace("##PUBLICKEY##", this.publicKey);
+     
     });
     // this.templateLines = this.templateOutput.split("\n");
     // console.log("Did it");
