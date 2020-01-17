@@ -6,34 +6,40 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/openpgp/4.6.2/compat/openpgp.min.js"></script>
 </head>
 <div class="templateComponent">
-    <body class ="{{bodyClass}}">
-        <div class="{{templateStyle}}" >
-        <div class="htmlTemplateContainer" [innerHTML]=safeHtmlTemplate></div>
-        <form class="templateCreator">
-            <label>Email Address:</label><br>
-            <input (input)="email=$event.target.value" type="text" class="form-control">
-            <label>Password for encryption</label>
-            <input type="hidden" (input)="password=$event.target.value" type="text" class="form-control">
-            Template:<br>
-            <br>
-            <select (change)="selectedItemChanged($event)">
-                <option *ngFor="let template of templates; let i = index" [value]="i" >{{ template.Name }}</option>
-            </select>
-            <br>
-            <input type="button" value="Generate Html" (click)="onClickHandler($event)">
-        </form>
-    </div>
-    <div class="{{templateCreatedStyle}}">
-       
-        <div class="templateHtml">
-            <section>Copy the below html into your site to use the template</section>
-            <button (click)="copyToClipboard($event)"> Copy template to clipboard</button>
-            <button (click)="downloadPrivKey($event)"> Save private key</button>
-            <button (click)="downloadPubKey($event)"> Save public key</button>
-            <div class="templateOutput" >
-                {{templateOutput}}
+    <body class="{{bodyClass}}">
+        <div class="{{templateStyle}}">
+            <div class="htmlTemplateContainer" [innerHTML]=safeHtmlTemplate></div>
+            <form class="templateCreator" autocomplete="off">
+                <label>Email Address:</label><br>
+                <span style="font-size: 10px">The encrypted emails will be sent to this email address</span>
+                <br>
+                <input (input)="email=$event.target.value" type="text" class="form-control">
+                <label>Password for encryption</label><br>
+                <span style="font-size: 10px">This password will be used to decrypt the encrypted messages</span>
+                <br>
+                <input type="password" (input)="password=$event.target.value" class="form-control">
+                <br>
+                Template:
+                <br>
+                <select (change)="selectedItemChanged($event)">
+                    <option *ngFor="let template of templates; let i = index" [value]="i">{{ template.Name }}</option>
+                </select>
+                <br>
+                <input type="button" value="Generate Html" (click)="onClickHandler($event)">
+            </form>
+        </div>
+        <div class="{{templateCreatedStyle}}">
+            <div class="templateHtml">
+                <section style="margin: 1em 8em;">Copy the below html into your site to use the template</section>
+                <span class="buttonSpan">
+                    <button (click)="copyToClipboard($event)">Copy template to clipboard</button>
+                    <button (click)="downloadPrivKey($event)">Download the private key</button>
+                    <button (click)="downloadPubKey($event)">Download the public key</button>
+                </span>
+                <div class="templateOutput">
+                    {{templateOutput}}
+                </div>
             </div>
         </div>
-    </div>
     </body>
 </div>

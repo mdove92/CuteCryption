@@ -61,6 +61,10 @@ div.template-container {
     padding: 6px;
 }
 
+.buttonSpan{
+  margin-left: 7.8em;
+}
+
 .htmlTemplateContainer{
     float: left;
 margin-top: 4em;
