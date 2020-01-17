@@ -1,0 +1,203 @@
+<head>
+    <script type="text/javascript" src="https://smtpjs.com/v3/smtp.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/openpgp/4.6.2/compat/openpgp.min.js"></script>
+  </head>
+  <style>
+  
+  .form-style-3 {
+    max-width: 450px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  }
+  
+  .form-style-3 label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .form-style-3 label>span {
+    float: left;
+    width: 100px;
+    color: #F072A9;
+    font-weight: bold;
+    font-size: 13px;
+    text-shadow: 1px 1px 1px #fff;
+  }
+  
+  .form-style-3 fieldset {
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    margin: 0px 0px 10px 0px;
+    border: 1px solid #FFD2D2;
+    padding: 20px;
+    background: #FFF4F4;
+    box-shadow: inset 0px 0px 15px #FFE5E5;
+    -moz-boshadow: inset 0px 0px 15px #FFE5E5;
+    -webkit-box-shadow: inset 0px 0px 15px #FFE5E5;
+  }
+  
+  .form-style-3 fieldset legend {
+    color: #FFA0C9;
+    border-top: 1px solid #FFD2D2;
+    border-left: 1px solid #FFD2D2;
+    border-right: 1px solid #FFD2D2;
+    border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    background: #FFF4F4;
+    padding: 0px 8px 3px 8px;
+    box-shadow: -0px -1px 2px #F1F1F1;
+    -moz-box-shadow: -0px -1px 2px #F1F1F1;
+    -webkit-box-shadow: -0px -1px 2px #F1F1F1;
+    font-weight: normal;
+    font-size: 12px;
+  }
+  .form-style-3 textarea {
+    width: 250px;
+    height: 100px;
+  }
+  
+  .form-style-3 input[type=text],
+  .form-style-3 input[type=date],
+  .form-style-3 input[type=datetime],
+  .form-style-3 input[type=number],
+  .form-style-3 input[type=search],
+  .form-style-3 input[type=time],
+  .form-style-3 input[type=url],
+  .form-style-3 input[type=email],
+  .form-style-3 select,
+  .form-style-3 textarea {
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border: 1px solid #FFC2DC;
+    outline: none;
+    color: #F072A9;
+    padding: 5px 8px 5px 8px;
+    box-shadow: inset 1px 1px 4px #FFD5E7;
+    -moz-box-shadow: inset 1px 1px 4px #FFD5E7;
+    -webkit-box-shadow: inset 1px 1px 4px #FFD5E7;
+    background: #FFEFF6;
+    width: 50%;
+  
+  }
+  
+  .form-style-3 input[type=submit],
+  .form-style-3 input[type=button] {
+    background: #EB3B88;
+    border: 1px solid #C94A81;
+    padding: 5px 15px 5px 15px;
+    color: #FFCBE2;
+    box-shadow: inset -1px -1px 3px #FF62A7;
+    -moz-box-shadow: inset -1px -1px 3px #FF62A7;
+    -webkit-box-shadow: inset -1px -1px 3px #FF62A7;
+    border-radius: 3px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    font-weight: bold;
+  }
+  </style>
+        <script type="text/javascript">
+            function onSubmitHandler() {
+                event.preventDefault();
+                const pubkey = "-----BEGIN PGP PUBLIC KEY BLOCK-----\n"+
+  "Version: OpenPGP.js v4.8.0\n"+
+  "Comment: https://openpgpjs.org\n"+
+  "\n"+
+  "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"+
+  "tBrpizJXu2klUkrfvdSJi76IzA/qP4IHPERFne8ly7XDtEWZJfdstd5FUjJ1"+
+  "z9m05DbJrZ5wT+EIqqyIoNN5qjSRv6xTciKYVyAxUN9dzq7R8jd/XD/cqkrl"+
+  "Juey5XQ++ZeC96NZdxzINVgkE66o49bTto7ATct+x/DGZ5D/cY+dz+KwbVNr"+
+  "b2yBKRPfI7N35tOLLnkYMI1PbaihnXS1drBnqlggzeHPoeXid28nEA3qiiVi"+
+  "rKrZ4bDhxmiRrrniIORWkrN57ortgJia83kcZiE9uWCcPOemFvz6wCkR8ZS/"+
+  "uTSe5TZ0bRLtXMZhUrNmh3gBRh/X3jL1tkGl4YQ8A1GtfpdgXJ4eby7NRtaZ"+
+  "U8cTKX4U1JXBmCSEU3Uv1scZ+z02ePhCEicjZiI+urG+D6GNOFKRRTXL9Bmc"+
+  "M+NhWzl+Vj/6yeLpdMHX318nlQ+fEfTJqL4rnSXo99zI9RDhrvI9zzNxacNu"+
+  "uK1vx+Kqz15qlQ9ak0+BfL4AM/JeeuQko7fmBjX13Dd1E89H83cuKQxMIYaq"+
+  "AMZGN3DhB+GDaQVdZvZpwtyc+YarKmpxI9E0ZAnmXHfthXeHrZUum9zWz5S1"+
+  "StK18P5UhBwvoxGiRJ2tB+a0cKPPbLOMLMtNrlMTYp9Z"+
+  "=+LqH\n"+
+  "-----END PGP PUBLIC KEY BLOCK-----\n"+
+  "\n"
+    key = openpgp.key.readArmored(pubkey);                key.then(k => {
+                     const options = {
+                          message: openpgp.message.fromText($("#Body").val()),       // input as Message object
+                          publicKeys: k.keys, // for encryption
+                      }
+  
+                      openpgp.encrypt(options).then(ciphertext => {
+                          encrypted = ciphertext.data // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
+                          return encrypted
+                    }).then(encrypted => {
+                            encryptedLines = encrypted.split("\n")
+                            htmlEncryptedMessage = ""
+                            encryptedLines.forEach((line) => {
+                                htmlEncryptedMessage = htmlEncryptedMessage.concat("<br/>", line);
+                            });
+                            Email.send({
+                               SecureToken: "28415814-75d1-4305-9102-41981722d7ae",
+                               To: 'duncadav@gmail.com',
+                                From: "CuteCrytion@outlook.com",
+                                Subject: "You have an encrypted message from CuteCryption",
+                                Body: htmlEncryptedMessage,
+                            }).then(
+                                message => alert(message)
+                            );
+                        });
+                });
+            }      </script>
+        <form class="form-style-3">
+            <fieldset>
+                <legend>Contact me securely here!</legend>
+                <div class="template-container">
+                    Body:
+                    <textarea id="Body" name="text" style="width:100%; height:100%;">
+            </textarea>
+                    <!-- Refer to this later to dd reCAPTCHA when deployed -->
+                    <div class="g-reCAPTCHA" data-sitekey="6LfmIMwUAAAAABx1gGB1bdvM4C_kU6CV1D4zjWjU"></div><br>
+                    <input id="submit" type="submit" value="Submit" onclick="onSubmitHandler()">
+  
+                </div>
+            </fieldset>
+       </form>

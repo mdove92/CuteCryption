@@ -110,9 +110,26 @@ export class TemplatesComponent implements OnInit {
     this.publicKey = pubkey;
     this.privateKey = privkey;
 
+    var splitKey = this.publicKey.split("\n");
+    var pubKeyForInsert = "";
+    var lineCount = 0;
+    splitKey.forEach((line)=> {
+
+      pubKeyForInsert += "\"" + line.replace("\r", "");
+      if(lineCount < 4 || lineCount > splitKey.length - 4){
+        pubKeyForInsert += "\\n";
+      }
+      
+      pubKeyForInsert += "\"+";
+      pubKeyForInsert += "\n";
+      lineCount++;
+    });
+
+    pubKeyForInsert = pubKeyForInsert.substring(0, pubKeyForInsert.length - 2);
+
     this.http.get(this.javaBackendUrl+`?templateName=${this.formStyle}&email=${this.email}`).subscribe(data => {
       
-       this.templateOutput=  data[0]["Contents"].replace("##PUBLICKEY##", this.publicKey);
+       this.templateOutput=  data[0]["Contents"].replace("'##PUBLICKEY##'", pubKeyForInsert);
      
     });
     // this.templateLines = this.templateOutput.split("\n");
