@@ -22,8 +22,9 @@ export class TemplatesComponent implements OnInit {
   userName = "";
   @Input() email = "user@domain.com"
   @Input() formStyle = "default";
-  @Input() templateStyle = "shown";
+  @Input() templateStyle = "hidden";
   @Input() templateCreatedStyle = "hidden";
+  @Input() spinnerStyle = "shown"
   @Input() bodyClass = "";
   @Input() templateLines = [];
   @Input() selectedTemplate = "";
@@ -51,6 +52,8 @@ export class TemplatesComponent implements OnInit {
         this.templates[0]["Contents"]
       );
       this.formStyle = this.templates[0]["Name"]
+      this.templateStyle = "shown";
+      this.spinnerStyle = "hidden";
     });
   }
   ngOnInit() {
