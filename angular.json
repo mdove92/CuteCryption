@@ -24,7 +24,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/bootstrap-min.css",
+              "src/bootstrap-plugin.css"
             ],
             "scripts": []
           },
@@ -89,7 +91,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/bootstrap-min.css",
+              "src/bootstrap-plugin.css"
             ],
             "scripts": ["src/openpgp.js"]
           }
