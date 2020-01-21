@@ -6,8 +6,6 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/openpgp/4.6.2/compat/openpgp.min.js"></script>
 </head>
 <div class="templateComponent">
-    <p style="padding-left: 2em; padding-top: 2em;">Please <a href="https://mailvelope.com" target="_blank">download Mailvelope</a> to decrypt your messages and store your keys.</p>
-
     <body class="{{bodyClass}}">
         <div id="spinnerContainer" class="{{spinnerStyle}}"></div>
         <h1 class="{{spinnerStyle}}">
@@ -24,9 +22,12 @@
         </h1>
         
         <div class="{{templateStyle}}">
+            <p style="padding-left: 2em; padding-top: 2em;">Please <a href="https://mailvelope.com" target="_blank">download Mailvelope</a> to decrypt your messages and store your keys.</p>
+
+            <p style="margin: 0 2em;">Fill out the fields below and select one of our templates to create your customized form</p>
             <div class="htmlTemplateContainer" [innerHTML]=safeHtmlTemplate></div>
             <form class="templateCreator" autocomplete="off">
-                <p>Fill out the fields below and select one of our templates to create your customized form</p>
+                
                 <label>Email Address:</label><br>
                 <span style="font-size: 10px">The encrypted emails will be sent to this email address</span>
                 <br>
@@ -46,8 +47,9 @@
             </form>
         </div>
         <div class="{{templateCreatedStyle}}">
-            <div class="templateHtml">
-                <section id="directions" >Copy the below html into your site to use the template</section>
+            <div class="templateHtml {{templateCreatedStyle}}">
+                <section class="{{templateCreatedStyle}}" id="directions" >Copy the below html into your site to use the template</section>
+                <section class="{{templateCreatedStyle}}" id="directions" >Be sure to download your private key and <a href="https://www.mailvelope.com/en/faq#import_keys">import it into your Mailvelope key ring.</a></section>
                 <span class="buttonSpan">
                     <button (click)="copyToClipboard($event)">Copy template to clipboard</button>
                     <button (click)="downloadPrivKey($event)">Download the private key</button>
