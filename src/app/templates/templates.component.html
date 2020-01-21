@@ -6,6 +6,8 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/openpgp/4.6.2/compat/openpgp.min.js"></script>
 </head>
 <div class="templateComponent">
+    <p style="padding-left: 2em; padding-top: 2em;">Please <a href="https://mailvelope.com" target="_blank">download Mailvelope</a> to decrypt your messages and store your keys.</p>
+
     <body class="{{bodyClass}}">
         <div id="spinnerContainer" class="{{spinnerStyle}}"></div>
         <h1 class="{{spinnerStyle}}">
@@ -20,19 +22,21 @@
             <span>.</span>
             <span>.</span>
         </h1>
+        
         <div class="{{templateStyle}}">
             <div class="htmlTemplateContainer" [innerHTML]=safeHtmlTemplate></div>
             <form class="templateCreator" autocomplete="off">
+                <p>Fill out the fields below and select one of our templates to create your customized form</p>
                 <label>Email Address:</label><br>
                 <span style="font-size: 10px">The encrypted emails will be sent to this email address</span>
                 <br>
-                <input (input)="email=$event.target.value" type="text" class="form-control">
-                <label>Password for encryption</label><br>
+                <input (input)="email=$event.target.value" type="text" class="form-control"><br>
+                <label>Password for encryption:</label><br>
                 <span style="font-size: 10px">This password will be used to decrypt the encrypted messages</span>
                 <br>
                 <input type="password" (input)="password=$event.target.value" class="form-control">
                 <br>
-                Template:
+                Template Style:
                 <br>
                 <select (change)="selectedItemChanged($event)">
                     <option *ngFor="let template of templates; let i = index" [value]="i">{{ template.Name }}</option>
