@@ -1,6 +1,7 @@
 .full-page-intro {
     height: 525px;
     padding-top: 4em;  
+    padding-bottom: -4em;
     background-color: #FDE56B; 
     background-repeat: no-repeat;
     background-size: cover;
@@ -44,3 +45,14 @@
             alt:'treasure chest'
   }
 
+  .grey-text {
+    color: #FDE56B;
+  }
+
+  #forwardArmadillo, #backArmadillo, #ballArmadillo{
+    padding-top: 8em;
+    height: 24%;
+    width: auto;
+    
+
+  }
