@@ -35,6 +35,7 @@ export class TemplatesComponent implements OnInit {
   @Input() password = "";
   @Input() publicKey = "";
   @Input() privateKey = "";
+  @Input() pageLoaded = false;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
   formGroup = new FormGroup({
@@ -58,6 +59,7 @@ export class TemplatesComponent implements OnInit {
         this.formStyle = this.templates[0]["Name"];
         this.templateStyle = "shown";
         this.spinnerStyle = "hidden";
+        this.pageLoaded = true;
       });
   }
   ngOnInit() {

@@ -21,7 +21,7 @@
             <span>.</span>
         </h1>
         
-        <div class="{{templateStyle}}">
+        <div ng-show="pageLoaded" class="{{templateStyle}}">
             <p style="padding-left: 2em; padding-top: 2em;">Please <a href="https://mailvelope.com" target="_blank">download Mailvelope</a> to decrypt your messages and store your keys.</p>
 
             <p style="margin: 0 2em;">Fill out the fields below and select one of our templates to create your customized form</p>
@@ -46,7 +46,7 @@
                 <input type="button" value="Generate Html" (click)="onClickHandler($event)">
             </form>
         </div>
-        <div class="{{templateCreatedStyle}}">
+        <div ng-show="pageLoaded" class="{{templateCreatedStyle}}">
             <div class="templateHtml {{templateCreatedStyle}}">
                 <section class="{{templateCreatedStyle}}" id="directions" >Copy the below html into your site to use the template</section>
                 <section class="{{templateCreatedStyle}}" id="directions" >Be sure to download your private key and <a href="https://www.mailvelope.com/en/faq#import_keys">import it into your Mailvelope key ring.</a></section>
