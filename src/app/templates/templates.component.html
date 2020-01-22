@@ -43,7 +43,7 @@
                     <option *ngFor="let template of templates; let i = index" [value]="i">{{ template.Name }}</option>
                 </select>
                 <br>
-                <input type="button" value="Generate Html" (click)="onClickHandler($event)">
+                <input type="button" value="Generate Html" (click)="onClickHandler($event)" class="btn btn-indigo btn-md">
             </form>
         </div>
         <div ng-show="pageLoaded" class="{{templateCreatedStyle}}">
@@ -51,9 +51,9 @@
                 <section class="{{templateCreatedStyle}}" id="directions" >Copy the below html into your site to use the template</section>
                 <section class="{{templateCreatedStyle}}" id="directions" >Be sure to download your private key and <a href="https://www.mailvelope.com/en/faq#import_keys">import it into your Mailvelope key ring.</a></section>
                 <span class="buttonSpan">
-                    <button (click)="copyToClipboard($event)">Copy template to clipboard</button>
-                    <button (click)="downloadPrivKey($event)">Download the private key</button>
-                    <button (click)="downloadPubKey($event)">Download the public key</button>
+                    <button (click)="copyToClipboard($event)" class="btn btn-indigo btn-md">Copy template to clipboard</button>
+                    <button (click)="downloadPrivKey($event)" class="btn btn-indigo btn-md">Download the private key</button>
+                    <button (click)="downloadPubKey($event)" class="btn btn-indigo btn-md">Download the public key</button>
                 </span>
                 <div class="templateOutput">
                     {{templateOutput}}
