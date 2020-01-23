@@ -24,6 +24,7 @@ The webapp itself has two main pages:
 
 ## Project Setup
 To setup this project, first ensure that you have the required dependencies. For this project, we rely on the following dependencies:
+```
 {
     "@angular-devkit/build-angular",
     "@angular/animations",
@@ -45,7 +46,8 @@ To setup this project, first ensure that you have the required dependencies. For
     "typescript",
     "wowjs",
     "zone.js"
-  }
+  } 
+  ```
   
   If you clone this repo and simply 'npm install' it should automatically get all of these dependencies for you.
   
